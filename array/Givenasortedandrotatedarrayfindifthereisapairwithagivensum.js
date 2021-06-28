@@ -6,13 +6,12 @@
 // given sum ‘x’. It may be assumed that all elements in the array are distinct.
 
 let test = [11, 15, 6, 8, 9, 10]
-let x = 16
+let x = 14
 let message;
 for (let i = 0; i < test.length; i++) {
-    for (let j = 1; j < test.length; j++) {
+    for (let j = i+1; j < test.length; j++) {
         if (test[i] + test[j] === x) {
-            message = true;
+            console.log("yes" , j)
         }
     }
 }
-console.log(message)
