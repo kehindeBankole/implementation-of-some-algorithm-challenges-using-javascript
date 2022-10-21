@@ -20,7 +20,6 @@ function smallest_subarray_sum(s, arr) {
   for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
     windowSum += arr[windowEnd]; // add the next element
     // shrink the window as small as possible until the 'window_sum' is smaller than 's'
-    console.log(windowSum , windowEnd , windowStart)
     while (windowSum >= s) {
       minLength = Math.min(minLength, windowEnd - windowStart + 1);
       windowSum -= arr[windowStart];
