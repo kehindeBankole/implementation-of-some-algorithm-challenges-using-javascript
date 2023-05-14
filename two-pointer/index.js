@@ -14,7 +14,7 @@ function pairWithTargetSum(arr, targetSum) {
   }
   return [-1, -1];
 }
-pairWithTargetSum([1, 2, 3, 4, 6], 6);
+//pairWithTargetSum([1, 2, 3, 4, 6], 6);
 
 function removeDuplicates(arr) {
   //can also be implemented with set , but using this method just to practice 2 pointer
@@ -29,10 +29,47 @@ Move all the unique elements at the beginning of the array and after moving retu
   }
   return nextNonDuplicate;
 }
-removeDuplicates([2, 3, 3, 3, 6, 9, 9]);
+//removeDuplicates([2, 3, 3, 3, 6, 9, 9]);
 
 function squareSortedArray(arr) {
   //Given a sorted array, create a new array containing squares of all the numbers of the input array in the sorted order.
   return arr.map((item) => item * item).sort((a, b) => a - b);
 }
-squareSortedArray([-2, -1, 0, 2, 3]);
+//squareSortedArray([-2, -1, 0, 2, 3]);
+
+function threeSome(arr) {
+  arr.sort((a, b) => a - b);
+  const triplets = [];
+  for (i = 0; i < arr.length; i++) {
+    // skip same element to avoid duplicate triplets
+    if (i > 0 && arr[i] === arr[i - 1]) {
+      continue;
+    }
+    searchPair(arr, -arr[i], i + 1, triplets);
+  }
+
+  return triplets;
+}
+function searchPair(arr, targetSum, left, triplets) {
+  let right = arr.length - 1;
+  for (let x = 0; x < right; x++) {
+    const currentSum = arr[left] + arr[right];
+    if (currentSum === targetSum) {
+      triplets.push([-targetSum, arr[left], arr[right]]);
+      left += 1;
+      right -= 1;
+      while (left < right && arr[left] === arr[left - 1]) {
+        left += 1; // skip same element to avoid duplicate triplets
+      }
+      while (left < right && arr[right] === arr[right + 1]) {
+        right -= 1; // skip same element to avoid duplicate triplets
+      }
+    } else if (currentSum < targetSum) {
+      left += 1;
+    } else {
+      right -= 1;
+    }
+  }
+}
+
+console.log(threeSome([-3, 0, 1, 2, -1, 1, -2]));
