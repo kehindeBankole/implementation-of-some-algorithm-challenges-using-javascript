@@ -1,4 +1,3 @@
-
 function threeSome(arr) {
   arr.sort((a, b) => a - b);
   const triplets = [];
@@ -20,12 +19,7 @@ function searchPair(arr, targetSum, left, triplets) {
       triplets.push([-targetSum, arr[left], arr[right]]);
       left += 1;
       right -= 1;
-      while (left < right && arr[left] === arr[left - 1]) {
-        left += 1; // skip same element to avoid duplicate triplets
-      }
-      while (left < right && arr[right] === arr[right + 1]) {
-        right -= 1; // skip same element to avoid duplicate triplets
-      }
+
     } else if (currentSum < targetSum) {
       left += 1;
     } else {
@@ -34,4 +28,31 @@ function searchPair(arr, targetSum, left, triplets) {
   }
 }
 
-console.log(threeSome([-3, 0, 1, 2, -1, 1, -2]));
+
+function strStr(haystack, needle) {
+  if (needle === "") return 0; // If needle is an empty string, return 0
+  
+  const haystackLen = haystack.length;
+  const needleLen = needle.length;
+  console.log(haystackLen - needleLen)
+  // Iterate through the haystack up to the point where the remaining substring could be long enough to contain the needle
+  for (let i = 0; i <= haystackLen - needleLen; i++) {
+    
+      // Check if the substring of haystack from i to i + needleLen matches needle
+      let j = 0;
+
+      while (j < needleLen && haystack[i + j] === needle[j]) {
+          j++;
+      }
+      // If the entire needle has been matched, return the start index
+      if (j === needleLen) {
+          return i;
+      }
+  }
+  
+  // If no match was found, return -1
+  return -1;
+}
+
+
+console.log(strStr("sadbutsad", "sad"))
